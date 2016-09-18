@@ -1,0 +1,24 @@
+{
+  "name": "koa-finally",
+  "version": "0.1.0",
+  "description": "Clear resources whenmddlewares finished",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yatsyk/koa-finally.git"
+  },
+  "keywords": [
+    "koa",
+    "node",
+    "middleware"
+  ],
+  "author": "Andrey Yatsyk <yatsyk@gmail.com> (http://andrey.yatsyk.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yatsyk/koa-finally/issues"
+  },
+  "homepage": "https://github.com/yatsyk/koa-finally#readme"
+}
