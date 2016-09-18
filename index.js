@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function koaFinally() {
-  rerturn function* (next) {
+  return function* (next) {
     this.finally = {
       errorCallbacks: [],
       finishCallbacks: [],
