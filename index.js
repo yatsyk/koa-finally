@@ -16,8 +16,10 @@ module.exports = function koaFinally() {
     }
 
     try {
+
       yield* next;
 
+    } finally {
       this.finally.finishCallbacks.forEach(function(c) {
         try {
           c();
@@ -35,8 +37,6 @@ module.exports = function koaFinally() {
           }
         });
       }
-    } catch (ee) {
-      throw ee;
     }
   }
 }
