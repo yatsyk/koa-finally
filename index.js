@@ -15,9 +15,29 @@ module.exports = function koaFinally() {
       }
     }
 
+    var errorHandlerProcessed = false;
+
+    var processErrorHandler = function() {
+      if (! errorHandlerProcessed) {
+        this.finally.errorCallbacks.forEach(function(c) {
+          try {
+            c();
+          } catch (error) {
+            console.error(`clean middleware error ${error}`);
+          }
+        });
+      }
+      errorHandlerProcessed = true;
+    }
+
     try {
 
       yield* next;
+
+    } catch(ee) {
+
+      processErrorHandler();
+      throw ee;
 
     } finally {
       this.finally.finishCallbacks.forEach(function(c) {
@@ -28,14 +48,7 @@ module.exports = function koaFinally() {
         }
       });
       if (this.response.status > 399) {
-        console.info('calling error clear handlers');
-        this.finally.errorCallbacks.forEach(function(c) {
-          try {
-            c();
-          } catch (error) {
-            console.error(`clean middleware error ${error}`);
-          }
-        });
+        processErrorHandler();
       }
     }
   }
