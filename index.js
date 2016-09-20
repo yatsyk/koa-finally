@@ -15,24 +15,28 @@ module.exports = function koaFinally() {
       }
     }
 
-    yield* next;
+    try {
+      yield* next;
 
-    this.finally.finishCallbacks.forEach(function(c) {
-      try {
-        c();
-      } catch (error) {
-        console.error(`clean middleware error ${error}`);
-      }
-    });
-    if (this.response.status > 399) {
-      console.info('calling error clear handlers');
-      this.finally.errorCallbacks.forEach(function(c) {
+      this.finally.finishCallbacks.forEach(function(c) {
         try {
           c();
         } catch (error) {
           console.error(`clean middleware error ${error}`);
         }
       });
+      if (this.response.status > 399) {
+        console.info('calling error clear handlers');
+        this.finally.errorCallbacks.forEach(function(c) {
+          try {
+            c();
+          } catch (error) {
+            console.error(`clean middleware error ${error}`);
+          }
+        });
+      }
+    } catch (ee) {
+      throw ee;
     }
   }
 }
