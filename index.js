@@ -2,6 +2,8 @@
 
 module.exports = function koaFinally() {
   return function* (next) {
+    var self = this;
+
     this.finally = {
       errorCallbacks: [],
       finishCallbacks: [],
@@ -19,7 +21,7 @@ module.exports = function koaFinally() {
 
     var processErrorHandler = function() {
       if (! errorHandlerProcessed) {
-        this.finally.errorCallbacks.forEach(function(c) {
+        self.finally.errorCallbacks.forEach(function(c) {
           try {
             c();
           } catch (error) {
