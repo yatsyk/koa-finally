@@ -17,7 +17,7 @@ module.exports = function koaFinally() {
 
     yield* next;
 
-    this.finally.finishCallbacks.forEach(function(f) {
+    this.finally.finishCallbacks.forEach(function(c) {
       try {
         c();
       } catch (error) {
@@ -26,7 +26,7 @@ module.exports = function koaFinally() {
     });
     if (this.response.status > 399) {
       console.info('calling error clear handlers');
-      this.finally.errorCallbacks.forEach(function(f) {
+      this.finally.errorCallbacks.forEach(function(c) {
         try {
           c();
         } catch (error) {
