@@ -1,6 +1,6 @@
 {
   "name": "koa-finally",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Clear resources whenmddlewares finished",
   "main": "index.js",
   "scripts": {
